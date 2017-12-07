@@ -33,7 +33,7 @@ class AuthController extends Controller
 			return $this->respondWithToken($token);
 		}
 
-		return response()->json(['error' => 'Unauthorized'], 401);
+		return response()->json(['error' => '密码不正确'], 401);
 	}
 
 	/**
@@ -55,7 +55,7 @@ class AuthController extends Controller
 	{
 		$this->guard()->logout();
 
-		return response()->json(['message' => 'Successfully logged out']);
+		return response()->json(['message' => '成功退出']);
 	}
 
 	/**
