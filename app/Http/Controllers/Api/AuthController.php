@@ -41,7 +41,7 @@ class AuthController extends Controller
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function me()
+	public function admin()
 	{
 		return response()->json($this->guard()->user());
 	}
