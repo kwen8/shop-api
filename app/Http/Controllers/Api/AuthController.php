@@ -15,7 +15,8 @@ class AuthController extends Controller
 	 */
 	public function __construct()
 	{
-		$this->middleware('auth:api', ['except' => ['login']]);
+		$this->middleware('jwt.refresh')->only('refresh');
+		$this->middleware('auth:api', ['except' => ['login', 'refresh']]);
 	}
 
 	/**
@@ -65,7 +66,9 @@ class AuthController extends Controller
 	 */
 	public function refresh()
 	{
-		return $this->respondWithToken($this->guard()->refresh());
+		return response()->json([
+			'message' => '成功refresh token'
+		]);
 	}
 
 	/**

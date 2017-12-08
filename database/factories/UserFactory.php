@@ -21,5 +21,16 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+		'created_at' => now(),
+		'updated_at' => now(),
+		'phone' => $faker->phoneNumber,
+		'gender' => $faker->randomElement([0,1,2]),
+		'idCardNum' => $faker->creditCardNumber,
+		'province' => $faker->country,
+		'city' => $faker->city,
+		'area' => $faker->address,
+		'status' => 0,
+		'idCardFront' => $faker->imageUrl(),
+		'idCardBack' => $faker->imageUrl()
     ];
 });
