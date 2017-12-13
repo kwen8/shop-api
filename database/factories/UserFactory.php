@@ -29,6 +29,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
 		'province' => $faker->country,
 		'city' => $faker->city,
 		'area' => $faker->address,
+		'address' => $faker->address,
 		'status' => 0,
 		'idCardFront' => $faker->imageUrl(),
 		'idCardBack' => $faker->imageUrl()
