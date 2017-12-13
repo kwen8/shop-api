@@ -34,7 +34,7 @@ class AuthController extends Controller
 			return $this->respondWithToken($token);
 		}
 
-		return response()->json(['error' => '密码不正确'], 401);
+		return response()->json(['message' => '用户名或密码不正确'], 401);
 	}
 
 	/**
