@@ -12,7 +12,7 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return UserCollection
      */
     public function index()
     {
@@ -44,11 +44,11 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return UserCollection
      */
     public function show($id)
     {
-        //
+		return new UserCollection(User::find($id));
     }
 
     /**
