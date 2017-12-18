@@ -30,12 +30,17 @@ $api->version('v1', [
 	$api->post('refresh', 'AuthController@refresh');
 
 	$api->group(['middleware' => 'api.auth'], function ($api) {
-		//获取管理员信息
+		//获取当前管理员信息
 		$api->get('admin', 'AuthController@admin');
+
+		// 获取管理员列表
+		$api->get('admins', 'AdminsController@index');
+
 		//  当前用户信息
 		$api->get('user', 'UsersController@userShow')->name('api.user.show');
 
 		$api->get('users', 'UsersController@index')->name('api.users.index');
 		$api->get('users/{id}', 'UsersController@show')->name('api.users.show');
+		$api->post('users', 'UsersController@store')->name('api.users.store');
 	});
 });

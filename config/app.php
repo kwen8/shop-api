@@ -169,6 +169,8 @@ return [
          */
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 		Barryvdh\Cors\ServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+		Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         /*
          * Application Service Providers...
          */

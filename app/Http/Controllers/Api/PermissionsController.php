@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\UserCollection;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Log;
 
-class UsersController extends Controller
+class PermissionsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return UserCollection
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-		return new UserCollection(User::isMember()->paginate());
+        //
     }
 
     /**
@@ -45,11 +42,11 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return UserCollection
+     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-		return new UserCollection(User::find($id));
+        //
     }
 
     /**
