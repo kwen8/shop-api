@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,6 +14,6 @@ class AdminsController extends Controller
 	 */
 	public function index()
 	{
-		return response()->json(User::Role('admin')->paginate());
+		return new UserCollection(User::Role('admin')->paginate());
     }
 }

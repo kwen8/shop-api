@@ -29,7 +29,7 @@ $api->version('v1', [
 	//刷新token
 	$api->post('refresh', 'AuthController@refresh');
 
-	$api->group(['middleware' => 'api.auth'], function ($api) {
+	$api->group(['middleware' => ['api.auth', 'role:superAdmin|admin']], function ($api) {
 		//获取当前管理员信息
 		$api->get('admin', 'AuthController@admin');
 

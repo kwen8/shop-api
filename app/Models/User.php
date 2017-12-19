@@ -48,9 +48,4 @@ class User extends Authenticatable implements JWTSubject
 	{
 		return [];
 	}
-
-	public function scopeIsMember($query)
-	{
-		return $query->where('id', '<>', 1);
-	}
 }
