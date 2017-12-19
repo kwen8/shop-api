@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->unsignedTinyInteger('status')->default(0)->comment('状态');
             $table->string('idCardFront')->nullable()->comment('身份证正面');
             $table->string('idCardBack')->nullable()->comment('身份证反面');
+            $table->timestamp('last_login_time')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

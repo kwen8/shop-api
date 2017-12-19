@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -31,10 +33,26 @@ class AuthController extends Controller
 		$credentials = $request->only('email', 'password');
 
 		if ($token = $this->guard()->attempt($credentials)) {
+			// 登录之后更新登录时间
+			$this->refreshLoginTime($this->guard()->user());
+			// 返回token给前端
 			return $this->respondWithToken($token);
 		}
 
 		return response()->json(['message' => '用户名或密码不正确'], 401);
+	}
+
+	/**
+	 * 登录之后更新登录时间
+	 *
+	 * @param $user
+	 *
+	 * @return void
+	 */
+	public function refreshLoginTime($user)
+	{
+		$user['last_login_time'] = Carbon::now();
+		$user->save;
 	}
 
 	/**

@@ -18,7 +18,9 @@ class UsersController extends Controller
     public function index()
     {
 		return new UserCollection(User::whereDoesntHave('roles', function ($query) {
-			$query->where('name', 'superAdmin')->orWhere('name', 'admin');
+			$query
+				->where('name', 'superAdmin')
+				->orWhere('name', 'admin');
 		})->paginate());
     }
 
