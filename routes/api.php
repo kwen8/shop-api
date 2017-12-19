@@ -36,6 +36,7 @@ $api->version('v1', [
 		$api->get('user', 'UsersController@userShow')->name('api.user.show');
 
 		$api->get('users', 'UsersController@index')->name('api.users.index');
+        $api->post('users', 'UsersController@create')->name('api.users.create');
 		$api->get('users/{id}', 'UsersController@show')->name('api.users.show');
 	});
 });

@@ -6,6 +6,7 @@ use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Validator;
 
 class UsersController extends Controller
 {
@@ -24,9 +25,41 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:users|max:50',
+            'email' => 'required|email|unique:users|max:255',
+            'phone' => 'unique:users',
+            'idCardNum' => 'unique:users',
+            'password' => 'required|min:6'
+        ]);
+        if($validator->fails()){
+            return $validator->errors();
+        }
+        $user =User::create([
+            'name' => $request->name,
+            'email' =>$request->email,
+            'phone' => $request->phone,
+            'password' => bcrypt($request->password) ,
+            'checkPass'=>$request->checkPass ,
+            'gender'  =>$request->gender,
+            'idCardNum' =>$request->idCardNum,
+            'idCardFront' =>$request->idCardFront,
+            'idCardBack' =>$request->idCardBack,
+            'status' => $request->status
+        ]);
+        if($user){
+            return response()->json([
+                'message' => '添加成功！',
+                'data' => $user
+            ]);
+        }else{
+            return response()->json([
+                'message' => '添加失败！',
+            ]);
+        }
+
     }
 
     /**
