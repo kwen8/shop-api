@@ -27,16 +27,26 @@ class UsersController extends Controller
      */
     public function create(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $rules =[
             'name' => 'required|unique:users|max:50',
             'email' => 'required|email|unique:users|max:255',
-            'phone' => 'unique:users',
-            'idCardNum' => 'unique:users',
             'password' => 'required|min:6'
-        ]);
+        ];
+
+        if ($request->phone){
+          array_push($rules,['phone' => 'unique:users']);
+        }
+
+        if($request->idCardNum){
+          array_push($rules,['idCardNum' => 'unique:users']);
+        }
+
+        $validator = Validator::make($request->all(), $rules);
+
         if($validator->fails()){
             return $validator->errors();
         }
+
         $user =User::create([
             'name' => $request->name,
             'email' =>$request->email,
@@ -53,11 +63,11 @@ class UsersController extends Controller
             return response()->json([
                 'message' => '添加成功！',
                 'data' => $user
-            ]);
+            ],200);
         }else{
             return response()->json([
                 'message' => '添加失败！',
-            ]);
+            ],401);
         }
 
     }
